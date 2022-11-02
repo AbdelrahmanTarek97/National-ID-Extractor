@@ -6,24 +6,18 @@ module.exports.isValidNationalId = (req, res, next) => {
   // Get the nationalId from the request
   let { nationalId } = req.params;
 
-  utils.validateNationalId(res, nationalId);
+  if (!utils.validateNationalId(res, nationalId)) return;
 
   // Split the nationalId into understandable values
   let splitNationalIdNumber = utils.splitNationalIdNumber(nationalId);
 
   // Validate the fields returned from splitting the nationalId
-  let validateNationalIdFields = utils.validateNationalIdFields(
-    res,
-    splitNationalIdNumber
-  );
+  if (!utils.validateNationalIdFields(res, splitNationalIdNumber)) return;
 
   // If validation is correct, continue to the next function
-  if (validateNationalIdFields) {
-    req.nationalIdFields = splitNationalIdNumber;
-    return next();
-  }
+  req.nationalIdFields = splitNationalIdNumber;
 
-  return utils.returnError(res, errorObjects.GENERIC_ERROR);
+  next();
 };
 
 module.exports.returnExtractedData = (req, res) => {

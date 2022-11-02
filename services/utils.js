@@ -29,16 +29,21 @@ splitNationalIdNumber = (nationalId) => {
 };
 
 validateNationalId = (res, nationalId) => {
-  if (!nationalId || !_.isString(nationalId))
-    return returnError(res, errorObjects.NATIONAL_ID_NOT_A_STRING);
-
+  if (!nationalId || !_.isString(nationalId)) {
+    returnError(res, errorObjects.NATIONAL_ID_NOT_A_STRING);
+    return false;
+  }
   // Check if the national id is 14 digits long
-  if (nationalId.length !== 14)
-    return returnError(res, errorObjects.NATIONAL_ID_LENGTH_VALIDATION);
-
+  if (nationalId.length !== 14) {
+    returnError(res, errorObjects.NATIONAL_ID_LENGTH_VALIDATION);
+    return false;
+  }
   // Check if the national id is all numbers
-  if (!isNumeric(nationalId))
-    return returnError(res, errorObjects.NATIONAL_ID_IS_NUMBER_VALIDATION);
+  if (!isNumeric(nationalId)) {
+    returnError(res, errorObjects.NATIONAL_ID_IS_NUMBER_VALIDATION);
+    return false;
+  }
+  return true;
 };
 
 validateNationalIdFields = (res, splitNationalIdNumber) => {
@@ -55,51 +60,55 @@ validateNationalIdFields = (res, splitNationalIdNumber) => {
 
   // Validate century
   if (!["0", "1", "2", "3"].includes(century)) {
-    return returnError(
+    returnError(
       res,
       errorObjects.NATIONAL_ID_BIRTHDATE_CANNOT_BE_IN_THE_FUTURE
     );
+    return false;
   }
 
   // Validate year
   if (century == 3 && parseInt(year) > 22) {
-    return returnError(
+    returnError(
       res,
       errorObjects.NATIONAL_ID_BIRTHDATE_CANNOT_BE_IN_THE_FUTURE
     );
+    return false;
   }
 
   // Validate Month
   if (parseInt(month) == 0 || parseInt(month) > 12) {
-    return returnError(res, errorObjects.NATIONAL_ID_HAS_TO_HAVE_A_VALID_MONTH);
+    returnError(res, errorObjects.NATIONAL_ID_HAS_TO_HAVE_A_VALID_MONTH);
+    return false;
   }
 
   // Validate day
   if (parseInt(day) == 0 || parseInt(day) > 31) {
-    return returnError(res, errorObjects.NATIONAL_ID_HAS_TO_HAVE_A_VALID_DAY);
+    returnError(res, errorObjects.NATIONAL_ID_HAS_TO_HAVE_A_VALID_DAY);
+    return false;
   }
 
   // Validate birth governate code
   if (!birthGovernate) {
-    return returnError(
+    returnError(
       res,
       errorObjects.NATIONAL_ID_HAS_TO_HAVE_A_VALID_GOVERNATE_CODE
     );
+    return false;
   }
 
   // Validate gender
   if (!gender) {
-    return returnError(
-      res,
-      errorObjects.NATIONAL_ID_HAS_TO_HAVE_A_VALID_GENDER
-    );
+    returnError(res, errorObjects.NATIONAL_ID_HAS_TO_HAVE_A_VALID_GENDER);
+    return false;
   }
 
   if (ministryOfInteriorDigit == 0) {
-    return returnError(
+    returnError(
       res,
       errorObjects.NATIONAL_ID_HAS_TO_HAVE_A_VALID_MINISTRY_OF_INTERIOR_CODE
     );
+    return false;
   }
 
   return true;
