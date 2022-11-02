@@ -1,0 +1,62 @@
+{
+  "NATIONAL_ID_LENGTH_VALIDATION": {
+    "code": 400,
+    "message": "A National ID has to be of length 14.",
+    "type": "Bad Parameter",
+    "path": "params.nationalId"
+  },
+  "NATIONAL_ID_IS_NUMBER_VALIDATION": {
+    "code": 400,
+    "message": "A National ID has to consist of only numbers.",
+    "type": "Bad Parameter",
+    "path": "params.nationalId"
+  },
+  "NATIONAL_ID_NOT_A_STRING": {
+    "code": 400,
+    "message": "A National ID has to be a string.",
+    "type": "Bad Parameter",
+    "path": "params.nationalId"
+  },
+  "NATIONAL_ID_BIRTHDATE_CANNOT_BE_IN_THE_FUTURE": {
+    "code": 400,
+    "message": "A National ID cannot have a birthdate that is in the future.",
+    "type": "Bad Parameter",
+    "path": "params.nationalId"
+  },
+  "NATIONAL_ID_HAS_TO_HAVE_A_VALID_MONTH": {
+    "code": 400,
+    "message": "A National ID cannot have a birthday with a month above 12 or below 1.",
+    "type": "Bad Parameter",
+    "path": "params.nationalId"
+  },
+  "NATIONAL_ID_HAS_TO_HAVE_A_VALID_DAY": {
+    "code": 400,
+    "message": "A National ID cannot have a birthday with a day above 31 or below 1.",
+    "type": "Bad Parameter",
+    "path": "params.nationalId"
+  },
+  "NATIONAL_ID_HAS_TO_HAVE_A_VALID_GOVERNATE_CODE": {
+    "code": 400,
+    "message": "A National ID cannot have an invalid birth governate code.",
+    "type": "Bad Parameter",
+    "path": "params.nationalId"
+  },
+  "NATIONAL_ID_HAS_TO_HAVE_A_VALID_GENDER": {
+    "code": 400,
+    "message": "A National ID cannot have an invalid gender code.",
+    "type": "Bad Parameter",
+    "path": "params.nationalId"
+  },
+  "NATIONAL_ID_HAS_TO_HAVE_A_VALID_MINISTRY_OF_INTERIOR_CODE": {
+    "code": 400,
+    "message": "A National ID cannot have an invalid ministry of interior code.",
+    "type": "Bad Parameter",
+    "path": "params.nationalId"
+  },
+  "GENERIC_ERROR": {
+    "code": 500,
+    "message": "Internal Server Error.",
+    "type": "Internal Server Error",
+    "path": "."
+  }
+}
